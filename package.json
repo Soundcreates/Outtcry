@@ -1,0 +1,37 @@
+{
+  "name": "outcry",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "pnpm": {
+    "overrides": {
+      "jito-ts>@solana/web3.js": "1.98.4"
+    }
+  },
+  "scripts": {
+    "lint": "node tools/lint.mjs",
+    "typecheck": "pnpm --recursive --if-present typecheck",
+    "test": "node tools/run-tests.mjs",
+    "test:phase0": "node tools/phase-00.mjs",
+    "test:world": "node tests/world/map-validator.test.mjs",
+    "test:integration": "pnpm --filter @outcry/web test:integration",
+    "validate:maps": "node tools/validate-maps.mjs",
+    "test:program": "node tests/program/smoke.test.mjs",
+    "test:program:localnet": "node --import tsx tools/phase-05.localnet.mjs",
+    "test:program:phase7": "node tools/test-program-localnet.mjs --matches=20",
+    "test:program:phase9": "node tools/test-program-localnet.mjs --matches=100",
+    "test:gate": "node tools/phase-00.mjs",
+    "verify:deployment": "node --env-file=.env tools/verify-deployment.mjs",
+    "prepare:devnet-match": "node --env-file=.env tools/prepare-devnet-match.mjs",
+    "prepare:devnet-match-tx": "node --env-file=.env tools/prepare-devnet-match-tx.mjs",
+    "build:program": "node tools/build-program.mjs",
+    "deploy:program": "pnpm build:program && node --env-file-if-exists=.env tools/deploy-program.mjs",
+    "dev:web": "pnpm --filter @outcry/web dev",
+    "dev:world": "pnpm --filter @outcry/world-server dev"
+  },
+  "devDependencies": {
+    "@solana/web3.js": "1.98.4",
+    "@types/node": "24.3.0",
+    "tsx": "4.20.3",
+    "typescript": "5.9.2"
+  }
+}

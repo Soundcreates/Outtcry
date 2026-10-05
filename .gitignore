@@ -1,0 +1,12 @@
+docs/*
+!docs/
+node_modules
+.pnpm-store
+target
+dist
+.next
+.env
+.secrets/
+artifacts
+*.md
+!docs/AUTHORITY.md
