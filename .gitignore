@@ -7,6 +7,9 @@ dist
 .next
 .env
 .secrets/
-artifacts
+/artifacts/
+/artifacts/showreel/outcry-showreel.mp4
 *.md
 !docs/AUTHORITY.md
+.vercel
+.env*
