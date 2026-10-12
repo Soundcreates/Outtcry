@@ -202,8 +202,16 @@ assert.match(privateInventoryPanelSource, /sessionKeypairForMatch/);
 assert.doesNotMatch(privateInventoryPanelSource, /wallet\.signTransaction/);
 assert.match(privacySource, /sendTeeSessionTransaction/);
 assert.doesNotMatch(privacySource, /sendTeeTransaction\(/);
-assert.match(privacySource, /!quotePermission\s*\?\s*waitForPrivateQuoteOnTee/);
-assert.match(privacySource, /!inventoryPermission\s*\?\s*waitForPrivateInventoryOnTee/);
+assert.doesNotMatch(privacySource, /!quotePermission\s*\?\s*waitForPrivateQuoteOnTee/);
+assert.doesNotMatch(privacySource, /!inventoryPermission\s*\?\s*waitForPrivateInventoryOnTee/);
+assert.ok(
+  privacySource.indexOf('label: "private_state_permissions"') < privacySource.indexOf("waitForPrivateQuoteOnTee({ connection: session.connection, quote"),
+  "private quote reads wait until its permission transaction completes",
+);
+assert.ok(
+  privacySource.indexOf('label: "private_state_permissions"') < privacySource.indexOf("waitForPrivateInventoryOnTee({ connection: session.connection, inventory"),
+  "private inventory reads wait until its permission transaction completes",
+);
 assert.match(matchActionsSource, /sendSessionTransaction/);
 assert.doesNotMatch(matchActionsSource, /preparePrivateQuoteOnchain|submit_quote_session/);
 

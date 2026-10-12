@@ -567,15 +567,6 @@ export async function ensurePrivateState(input: {
   // The program-side handlers are idempotent: they create a missing
   // permission and update an existing one. Always run both so a fresh session
   // signer is added to an existing match's member list.
-  await Promise.all([
-    !quotePermission
-      ? waitForPrivateQuoteOnTee({ connection: session.connection, quote, matchAddress: input.matchAddress, dealer: input.player, programId })
-      : Promise.resolve(),
-    !inventoryPermission
-      ? waitForPrivateInventoryOnTee({ connection: session.connection, inventory, matchAddress: input.matchAddress, player: input.player, programId })
-      : Promise.resolve(),
-  ]);
-
   await sendTeeSessionTransaction({
     connection: session.connection,
     sessionKeypair: input.sessionKeypair,
